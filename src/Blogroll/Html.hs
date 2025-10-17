@@ -8,6 +8,7 @@ import Blogroll.Feed (mergeFeedEntries, parseFeed)
 import Blogroll.Fetch (extractDomain, fetchAllFavicons, fetchFeed)
 import Blogroll.Type (FeedEntry (..), Blogroll (..))
 import Control.Concurrent.Async (mapConcurrently)
+import Data.List (groupBy)
 import Data.Map qualified as Map
 import Data.Text (Text)
 import Data.Text qualified as T
@@ -70,7 +71,8 @@ renderAll blogroll = do
 
 renderHtml :: [FeedEntry] -> Text -> Text -> Text
 renderHtml entries title faviconCss =
-  let entriesHtml = T.concat $ map renderEntry entries
+  let groupedEntries = groupBy (\a b -> formatDate a.entryDate == formatDate b.entryDate) entries
+      entriesHtml = T.concat $ map renderDateGroup groupedEntries
    in """
       <!DOCTYPE html>
       <html>
@@ -94,10 +96,19 @@ renderHtml entries title faviconCss =
              border-bottom: 2px solid #3498db;
              padding-bottom: 10px;
            }
+           h2.date-header {
+             color: #7f8c8d;
+             font-size: 0.9em;
+             font-weight: 600;
+             margin-top: 1.5em;
+             margin-bottom: 0.5em;
+             padding-left: 8px;
+           }
            ul {
              list-style: none;
              padding: 0;
-             margin-top: 0
+             margin-top: 0;
+             margin-bottom: 0;
            }
            li {
              padding-left: 8px;
@@ -110,10 +121,6 @@ renderHtml entries title faviconCss =
            }
            a:hover {
              text-decoration: underline;
-           }
-           .date {
-             color: #7f8c8d;
-             font-size: 0.6em;
            }
            .source {
              color: #95a5a6;
@@ -129,19 +136,30 @@ renderHtml entries title faviconCss =
              <h1>"""
         <> title
         <> """</h1>
-           <ul>
            """
         <> entriesHtml
         <> """
-              <li><a href=\"all.html\">See all</a></li>
-              </ul>
+              <ul><li><a href=\"all.html\">See all</a></li></ul>
             </body>
            </html>
            """
   where
+    formatDate = T.pack . formatTime defaultTimeLocale "%Y-%m-%d"
+
+    renderDateGroup :: [FeedEntry] -> Text
+    renderDateGroup [] = ""
+    renderDateGroup (entry : rest) =
+      T.concat
+        [ "<h2 class=\"date-header\">",
+          formatDate entry.entryDate,
+          "</h2>\n<ul>\n",
+          T.concat $ map renderEntry (entry : rest),
+          "</ul>\n"
+        ]
+
     renderEntry entry =
       T.concat
-        [ "<li><div><a href=\"",
+        [ "<li><a href=\"",
           entryLink entry,
           "\" class=\"",
           generateDomainCssClass (extractDomain entry.entrySiteUrl),
@@ -149,8 +167,5 @@ renderHtml entries title faviconCss =
           entryTitle entry,
           "</a><span class=\"source\">(",
           extractDomain entry.entrySiteUrl,
-          ")</span></div>",
-          "<div class=\"date\">",
-          T.pack $ formatTime defaultTimeLocale "%Y-%m-%d" entry.entryDate,
-          "</div></li>"
+          ")</span></li>\n"
         ]

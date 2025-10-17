@@ -8,6 +8,26 @@ Blogroll is an RSS feed aggregator written in Haskell that generates static HTML
 
 ## Build and Development Commands
 
+### Using Nix (Recommended)
+
+```bash
+# Build the project (dynamic linking, default)
+nix build
+
+# Build static binary (Linux only - musl + UPX compressed, ~4MB)
+# Note: First build takes several hours as all dependencies are rebuilt for musl
+# Subsequent builds are cached and fast
+nix build .#blogroll-static
+
+# Run directly
+nix run . -- blogroll.txt
+
+# Enter development shell with GHC 9.12.2, cabal, and haskell-language-server
+nix develop
+```
+
+### Using Cabal
+
 ```bash
 # Build the project
 cabal build
@@ -75,8 +95,10 @@ Key external libraries:
    - Extracts version from cabal file
    - Creates and pushes git tag `v<version>`
 3. GitHub Actions workflow `build-release.yml` triggers on tag push:
-   - Builds optimized binary
+   - Builds optimized binary with Cabal (dynamic linking)
    - Creates release with `blogroll.tar.gz` artifact
+
+Note: GitHub Actions uses Cabal builds for releases (not static Nix builds). The `nix build .#blogroll-static` target is available for local Linux builds only.
 
 ## GitHub Actions Workflows
 
@@ -131,6 +153,7 @@ Empty lines are ignored. The file is read from the path provided as the first CL
 
 ## Deployment
 
-The application is deployed to GitHub Pages at: https://unorsk.github.io/blogroll/
+The application is deployed to GitHub Pages at: https://unisay.github.io/blogroll/
 
 Daily updates are automated via GitHub Actions, which fetches fresh feed data and regenerates the HTML pages.
+- when I say something like "rebuild feed" I mean running github worflow @.github/workflows/daily-feed.yml

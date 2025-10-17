@@ -98,7 +98,7 @@ renderHtml entries title faviconCss =
            }
            h2.date-header {
              color: #7f8c8d;
-             font-size: 0.9em;
+             font-size: 0.72em;
              font-weight: 600;
              margin-top: 1.5em;
              margin-bottom: 0.5em;
@@ -118,6 +118,9 @@ renderHtml entries title faviconCss =
              color: #2980b9;
              text-decoration: none;
              font-weight: 500;
+           }
+           a:visited {
+             color: #7f8c8d;
            }
            a:hover {
              text-decoration: underline;

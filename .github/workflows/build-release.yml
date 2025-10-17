@@ -27,7 +27,7 @@ jobs:
       - name: Setup Cachix
         uses: cachix/cachix-action@v14
         with:
-          name: blogroll
+          name: unisay-blogroll
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
       - name: Build static binary with Nix

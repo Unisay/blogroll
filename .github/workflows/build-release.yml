@@ -16,35 +16,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Haskell
-        uses: haskell-actions/setup@v2
+      - name: Install Nix
+        uses: cachix/install-nix-action@v26
         with:
-          ghc-version: "9.12.2"
-          cabal-version: "latest"
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            accept-flake-config = true
 
-      - name: Cache dependencies
-        uses: actions/cache@v3
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v14
         with:
-          path: |
-            ~/.cabal/store
-            dist-newstyle
-          key: ${{ runner.os }}-cabal-${{ hashFiles('**/*.cabal') }}
-          restore-keys: |
-            ${{ runner.os }}-cabal-
+          name: blogroll
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
-      - name: Update package list
-        run: cabal update
+      - name: Build static binary with Nix
+        run: nix build .#blogroll-static -L
 
-      - name: Build with optimization
-        run: cabal build --enable-optimization=2
-
-      - name: Install to local bin
-        run: cabal install --install-method=copy --installdir=./bin
+      - name: Verify binary
+        run: |
+          ls -lh result/bin/blogroll
+          file result/bin/blogroll
+          ldd result/bin/blogroll || echo "Static binary - no dynamic dependencies"
 
       - name: Create release archive
         run: |
           mkdir -p release/blogroll-bin
-          cp bin/blogroll release/blogroll-bin/
+          cp result/bin/blogroll release/blogroll-bin/
           cd release
           tar -czf blogroll.tar.gz blogroll-bin/
 

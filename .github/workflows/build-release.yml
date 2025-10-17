@@ -43,10 +43,10 @@ jobs:
 
       - name: Create release archive
         run: |
-          mkdir -p release/blogroll
-          cp bin/blogroll release/blogroll/
+          mkdir -p release/blogroll-bin
+          cp bin/blogroll release/blogroll-bin/
           cd release
-          tar -czf blogroll.tar.gz blogroll/
+          tar -czf blogroll.tar.gz blogroll-bin/
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2

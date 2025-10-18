@@ -84,21 +84,21 @@ renderHtml entries title faviconCss =
              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
              max-width: 800px;
              margin: 0 auto;
-             /* padding-left: 0.5em; */
-             /* padding-right: 0.5em; */
-             color: #333;
+             padding: 1em;
+             background-color: #1F1F1F;
+             color: #CCCCCC;
              display: flex;
              flex-flow: column;
              align-content: center;
            }
            h1 {
-             color: #2c3e50;
-             border-bottom: 2px solid #3498db;
+             color: #CCCCCC;
+             border-bottom: 2px solid #0078D4;
              padding-bottom: 10px;
            }
            h2.date-header {
-             color: #7f8c8d;
-             font-size: 0.72em;
+             color: #6E7681;
+             font-size: 0.9em;
              font-weight: 600;
              margin-top: 1.5em;
              margin-bottom: 0.5em;
@@ -115,18 +115,19 @@ renderHtml entries title faviconCss =
              padding-bottom: 8px;
            }
            a {
-             color: #2980b9;
+             color: #0078D4;
              text-decoration: none;
              font-weight: 500;
            }
            a:visited {
-             color: #7f8c8d;
+             color: #569CD6;
            }
            a:hover {
              text-decoration: underline;
+             color: #3CA3FF;
            }
            .source {
-             color: #95a5a6;
+             color: #6E7681;
              font-size: 0.8em;
              padding-left: 0.5em;
            }

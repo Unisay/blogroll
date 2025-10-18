@@ -30,6 +30,11 @@ jobs:
           name: unisay-blogroll
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
+      - name: Setup haskell.nix cache
+        uses: cachix/cachix-action@v14
+        with:
+          name: iohk
+
       - name: Verify Cachix configuration
         run: |
           echo "=== Nix substituters ==="

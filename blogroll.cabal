@@ -1,7 +1,7 @@
 cabal-version:      3.14
 name:               blogroll
 
-version:            1.0.13
+version:            1.0.14
 license:            MIT
 license-file:       LICENSE
 author:             unorsk

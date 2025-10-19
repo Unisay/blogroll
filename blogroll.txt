@@ -22,3 +22,4 @@ https://www.stephendiehl.com/feed.xml
 https://www.tweag.io/rss.xml
 https://ziglang.org/devlog/index.xml
 https://ziglang.org/news/index.xml
+http://jackkelly.name/blog/rss.xml

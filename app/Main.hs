@@ -9,6 +9,8 @@ import Blogroll.Type (Blogroll (..))
 import Data.Text (Text)
 import Data.Text qualified as T
 import Data.Text.IO qualified as TIO
+import Data.Version (showVersion)
+import Paths_blogroll (version)
 import System.Environment (getArgs)
 
 main :: IO ()
@@ -17,7 +19,8 @@ main = do
   case args of
     [blogrollPath] -> do
       urls <- readUrlsFromFile (T.pack blogrollPath)
-      let blogroll = Blogroll {title = "Good Stuff!", urls = urls}
+      let title = T.pack $ "Blogroll v" ++ showVersion version
+      let blogroll = Blogroll {title = title, urls = urls}
       putStrLn $ "Found " ++ show (length urls) ++ " feeds"
       renderAll blogroll
     _ -> do

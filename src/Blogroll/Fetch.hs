@@ -58,7 +58,12 @@ fetchFeed url = do
 
 extractDomain :: Text -> Text
 extractDomain url =
-  let withoutProtocol = T.drop (T.length "https://") url
+  let withoutProtocol =
+        case T.stripPrefix "https://" url of
+          Just rest -> rest
+          Nothing -> case T.stripPrefix "http://" url of
+            Just rest -> rest
+            Nothing -> url
    in T.takeWhile (/= '/') withoutProtocol
 
 fetchFavicon :: Text -> IO (Maybe Text)

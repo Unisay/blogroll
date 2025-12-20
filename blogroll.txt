@@ -14,7 +14,6 @@ https://notes.eatonphil.com/rss.xml
 https://okmij.org/ftp/rss.xml
 https://thume.ca/atom.xml
 https://without.boats/index.xml
-https://www.dbreunig.com/feed.xml
 https://www.hillelwayne.com/index.xml
 https://www.jasonwei.net/blog?format=rss
 https://www.jeremykun.com/index.xml
@@ -25,3 +24,11 @@ https://ziglang.org/news/index.xml
 http://jackkelly.name/blog/rss.xml
 https://etorreborre.blog/rss.xml
 https://chrispenner.ca/atom.xml
+https://filipesilva.github.io/paulgraham-rss/feed.rss
+https://program247365.github.io/paulgraham-rss/rss.xml
+http://steveblank.com/feed/
+https://feld.com/feed
+http://blog.samaltman.com/posts.atom
+https://andrewchen.substack.com/feed
+http://guykawasaki.com/feed/
+http://ben-evans.com/benedictevans?format=rss

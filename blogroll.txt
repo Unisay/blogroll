@@ -21,10 +21,8 @@ https://www.stephendiehl.com/feed.xml
 https://www.tweag.io/rss.xml
 http://jackkelly.name/blog/rss.xml
 https://etorreborre.blog/rss.xml
-https://chrispenner.ca/atom.xml
 https://filipesilva.github.io/paulgraham-rss/feed.rss
 https://program247365.github.io/paulgraham-rss/rss.xml
-http://steveblank.com/feed/
 https://feld.com/feed
 http://blog.samaltman.com/posts.atom
 https://andrewchen.substack.com/feed

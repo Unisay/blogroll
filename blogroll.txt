@@ -19,8 +19,6 @@ https://www.jasonwei.net/blog?format=rss
 https://www.jeremykun.com/index.xml
 https://www.stephendiehl.com/feed.xml
 https://www.tweag.io/rss.xml
-https://ziglang.org/devlog/index.xml
-https://ziglang.org/news/index.xml
 http://jackkelly.name/blog/rss.xml
 https://etorreborre.blog/rss.xml
 https://chrispenner.ca/atom.xml
@@ -32,3 +30,4 @@ http://blog.samaltman.com/posts.atom
 https://andrewchen.substack.com/feed
 http://guykawasaki.com/feed/
 http://ben-evans.com/benedictevans?format=rss
+https://www.lesswrong.com/feed.xml?view=curated-rss
